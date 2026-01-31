@@ -22,7 +22,6 @@ const NAV = [
   { href: "/dashboard/savings", label: "Savings", icon: PiggyBank },
   { href: "/dashboard/debts", label: "Debts", icon: CreditCard },
   { href: "/dashboard/expenses", label: "Expenses", icon: Receipt },
-  // { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ] as const;
 
 export function MobileNav() {
