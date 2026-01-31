@@ -68,7 +68,7 @@ export default function ExpensesPage() {
   const expenseBreakdown = overview.data?.expenses ?? [];
   const total = expenses.reduce(
     (s, e) => s + parseFloat(String(e.amount) || "0"),
-    0
+    0,
   );
 
   function openAdd() {
@@ -124,9 +124,6 @@ export default function ExpensesPage() {
     <div className="space-y-6">
       <header className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            Expenses
-          </p>
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Monthly spending
           </h1>
@@ -156,7 +153,11 @@ export default function ExpensesPage() {
                 ? `+${change.toFixed(1)}% vs last month`
                 : `${change.toFixed(1)}% vs last month`;
             const changeClass =
-              change > 0 ? "text-green-600 dark:text-green-400" : change < 0 ? "text-destructive" : "text-muted-foreground";
+              change > 0
+                ? "text-green-600 dark:text-green-400"
+                : change < 0
+                  ? "text-destructive"
+                  : "text-muted-foreground";
             return (
               <Card key={item.id} className="border-border bg-card">
                 <CardHeader className="space-y-1">
@@ -175,7 +176,9 @@ export default function ExpensesPage() {
                       style={{
                         width: `${Math.min(
                           100,
-                          ((item.amount ?? 0) / (overview.data?.totalExpenses || 1)) * 100
+                          ((item.amount ?? 0) /
+                            (overview.data?.totalExpenses || 1)) *
+                            100,
                         )}%`,
                       }}
                     />
@@ -260,7 +263,9 @@ export default function ExpensesPage() {
                       <TableRow key={row.id}>
                         <TableCell>{row.name}</TableCell>
                         <TableCell>{row.categoryName}</TableCell>
-                        <TableCell className="text-right">{row.amount}</TableCell>
+                        <TableCell className="text-right">
+                          {row.amount}
+                        </TableCell>
                         <TableCell className="flex gap-2">
                           <Button
                             variant="ghost"

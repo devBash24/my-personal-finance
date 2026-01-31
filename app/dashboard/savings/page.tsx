@@ -82,7 +82,7 @@ export default function SavingsPage() {
   }
   const totalBalance = [...balanceByAccount.values()].reduce(
     (s, b) => s + b,
-    0
+    0,
   );
 
   const savingAccount = isCreatingAccount || isUpdatingAccount;
@@ -124,7 +124,7 @@ export default function SavingsPage() {
   async function handleDeleteAccount(id: string) {
     if (
       !confirm(
-        "Delete this account? All transactions for it will also be removed."
+        "Delete this account? All transactions for it will also be removed.",
       )
     )
       return;
@@ -173,9 +173,6 @@ export default function SavingsPage() {
     <div className="space-y-6">
       <header className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            Savings
-          </p>
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Savings buckets
           </h1>

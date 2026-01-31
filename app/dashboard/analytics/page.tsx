@@ -81,9 +81,6 @@ export default function AnalyticsPage() {
     <div className="space-y-6">
       <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            Analytics
-          </p>
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Charts & insights
           </h1>
@@ -142,8 +139,14 @@ export default function AnalyticsPage() {
               ) : (
                 <div className="h-[260px] w-full min-w-0 sm:h-[300px]">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={chartData} margin={{ top: 8, right: 4, left: -16, bottom: 0 }}>
-                      <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                    <BarChart
+                      data={chartData}
+                      margin={{ top: 8, right: 4, left: -16, bottom: 0 }}
+                    >
+                      <CartesianGrid
+                        strokeDasharray="3 3"
+                        className="stroke-muted"
+                      />
                       <XAxis
                         dataKey="label"
                         className="text-[10px] sm:text-xs"
@@ -175,20 +178,20 @@ export default function AnalyticsPage() {
                         labelFormatter={(label) => label}
                       />
                       <Legend wrapperStyle={{ fontSize: "12px" }} />
-                    <Bar
-                      dataKey="income"
-                      name="Income"
-                      fill={CHART_COLORS[0]}
-                      radius={[4, 4, 0, 0]}
-                    />
-                    <Bar
-                      dataKey="expenses"
-                      name="Expenses"
-                      fill={CHART_COLORS[1]}
-                      radius={[4, 4, 0, 0]}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
+                      <Bar
+                        dataKey="income"
+                        name="Income"
+                        fill={CHART_COLORS[0]}
+                        radius={[4, 4, 0, 0]}
+                      />
+                      <Bar
+                        dataKey="expenses"
+                        name="Expenses"
+                        fill={CHART_COLORS[1]}
+                        radius={[4, 4, 0, 0]}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
                 </div>
               )}
             </CardContent>
@@ -197,9 +200,7 @@ export default function AnalyticsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Net cash flow</CardTitle>
-              <CardDescription>
-                Income minus expenses per month
-              </CardDescription>
+              <CardDescription>Income minus expenses per month</CardDescription>
             </CardHeader>
             <CardContent>
               {isLoading ? (
@@ -207,8 +208,14 @@ export default function AnalyticsPage() {
               ) : (
                 <div className="h-[260px] w-full min-w-0 sm:h-[300px]">
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={chartData} margin={{ top: 8, right: 4, left: -16, bottom: 0 }}>
-                      <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                    <AreaChart
+                      data={chartData}
+                      margin={{ top: 8, right: 4, left: -16, bottom: 0 }}
+                    >
+                      <CartesianGrid
+                        strokeDasharray="3 3"
+                        className="stroke-muted"
+                      />
                       <XAxis
                         dataKey="label"
                         className="text-[10px] sm:text-xs"
@@ -232,19 +239,22 @@ export default function AnalyticsPage() {
                           borderRadius: "var(--radius)",
                           fontSize: "12px",
                         }}
-                        formatter={(value: number) => [formatCurrency(value), "Net"]}
+                        formatter={(value: number) => [
+                          formatCurrency(value),
+                          "Net",
+                        ]}
                         labelFormatter={(label) => label}
                       />
                       <Area
-                      type="monotone"
-                      dataKey="netCashFlow"
-                      name="Net cash flow"
-                      stroke={CHART_COLORS[2]}
-                      fill={CHART_COLORS[2]}
-                      fillOpacity={0.3}
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
+                        type="monotone"
+                        dataKey="netCashFlow"
+                        name="Net cash flow"
+                        stroke={CHART_COLORS[2]}
+                        fill={CHART_COLORS[2]}
+                        fillOpacity={0.3}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
               )}
             </CardContent>
@@ -253,9 +263,7 @@ export default function AnalyticsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Savings over time</CardTitle>
-              <CardDescription>
-                Monthly savings contributions
-              </CardDescription>
+              <CardDescription>Monthly savings contributions</CardDescription>
             </CardHeader>
             <CardContent>
               {isLoading ? (
@@ -263,8 +271,14 @@ export default function AnalyticsPage() {
               ) : (
                 <div className="h-[260px] w-full min-w-0 sm:h-[300px]">
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={chartData} margin={{ top: 8, right: 4, left: -16, bottom: 0 }}>
-                      <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                    <AreaChart
+                      data={chartData}
+                      margin={{ top: 8, right: 4, left: -16, bottom: 0 }}
+                    >
+                      <CartesianGrid
+                        strokeDasharray="3 3"
+                        className="stroke-muted"
+                      />
                       <XAxis
                         dataKey="label"
                         className="text-[10px] sm:text-xs"
@@ -288,7 +302,10 @@ export default function AnalyticsPage() {
                           borderRadius: "var(--radius)",
                           fontSize: "12px",
                         }}
-                        formatter={(value: number) => [formatCurrency(value), "Savings"]}
+                        formatter={(value: number) => [
+                          formatCurrency(value),
+                          "Savings",
+                        ]}
                         labelFormatter={(label) => label}
                       />
                       <Area
@@ -299,8 +316,8 @@ export default function AnalyticsPage() {
                         fill={CHART_COLORS[3]}
                         fillOpacity={0.3}
                       />
-                  </AreaChart>
-                </ResponsiveContainer>
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
               )}
             </CardContent>
@@ -336,13 +353,13 @@ export default function AnalyticsPage() {
                         dataKey="value"
                         nameKey="name"
                       >
-                      {pieData.map((_, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={CHART_COLORS[index % CHART_COLORS.length]}
-                        />
-                      ))}
-                    </Pie>
+                        {pieData.map((_, index) => (
+                          <Cell
+                            key={`cell-${index}`}
+                            fill={CHART_COLORS[index % CHART_COLORS.length]}
+                          />
+                        ))}
+                      </Pie>
                       <Tooltip
                         contentStyle={{
                           backgroundColor: "var(--card)",

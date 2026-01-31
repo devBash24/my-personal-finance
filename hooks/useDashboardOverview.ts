@@ -36,17 +36,28 @@ export type DashboardOverview = {
   }>;
 };
 
-async function fetchOverview(month: number, year: number): Promise<DashboardOverview> {
-  const res = await fetch(
-    `/api/dashboard/overview?month=${month}&year=${year}`,
-    { cache: "no-store" }
-  );
+async function fetchOverview(month?: number, year?: number): Promise<DashboardOverview> {
+  const url =
+    month != null && year != null
+      ? `/api/dashboard/overview?month=${month}&year=${year}`
+      : "/api/dashboard/overview";
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) {
     throw new Error("Failed to load dashboard overview");
   }
   return res.json();
 }
 
+/** All-time overview (no month filter). Use for the main Dashboard page. */
+export function useDashboardOverviewAllTime() {
+  return useQuery<DashboardOverview>({
+    queryKey: ["dashboard", "overview", "all"],
+    queryFn: () => fetchOverview(),
+    refetchOnWindowFocus: false,
+  });
+}
+
+/** Month-specific overview. Use for expenses page, analytics, etc. */
 export function useDashboardOverview(month: number, year: number) {
   return useQuery<DashboardOverview>({
     queryKey: ["dashboard", "overview", month, year],

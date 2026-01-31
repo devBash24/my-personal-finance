@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { toast } from "sonner";
 import { useDebts } from "@/hooks/useDebts";
@@ -59,13 +58,10 @@ export default function DebtsPage() {
   const [monthlyPayment, setMonthlyPayment] = useState("");
 
   const saving = isCreating || isUpdating;
-  const totalPrincipal = debts.reduce(
-    (s, d) => s + parseNum(d.principal),
-    0
-  );
+  const totalPrincipal = debts.reduce((s, d) => s + parseNum(d.principal), 0);
   const totalMonthly = debts.reduce(
     (s, d) => s + parseNum(d.monthlyPayment),
-    0
+    0,
   );
 
   function openAdd() {
@@ -128,9 +124,6 @@ export default function DebtsPage() {
     <div className="space-y-6">
       <header className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            Debts
-          </p>
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Loans &amp; credit
           </h1>
@@ -282,9 +275,7 @@ export default function DebtsPage() {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>
-              {editingId ? "Edit debt" : "Add debt"}
-            </DialogTitle>
+            <DialogTitle>{editingId ? "Edit debt" : "Add debt"}</DialogTitle>
             <DialogDescription>
               Name, principal, optional interest rate, and monthly payment.
             </DialogDescription>

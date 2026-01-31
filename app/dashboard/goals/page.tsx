@@ -35,7 +35,7 @@ function formatNum(n: number): string {
 function monthlyNeeded(
   target: number,
   progress: number,
-  targetDate: Date | null
+  targetDate: Date | null,
 ): number | null {
   if (!targetDate || target <= progress) return null;
   const now = new Date();
@@ -128,7 +128,7 @@ export default function GoalsPage() {
   async function toggleAccount(
     goalId: string,
     accountId: string,
-    linked: boolean
+    linked: boolean,
   ) {
     try {
       if (linked) {
@@ -147,9 +147,6 @@ export default function GoalsPage() {
     <div className="space-y-6">
       <header className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            Goals
-          </p>
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Savings goals
           </h1>
@@ -264,9 +261,7 @@ export default function GoalsPage() {
                         month: "short",
                         day: "numeric",
                       })}
-                      {needed != null && (
-                        <> · {formatNum(needed)}/mo needed</>
-                      )}
+                      {needed != null && <> · {formatNum(needed)}/mo needed</>}
                     </p>
                   )}
                   {g.accountIds.length > 0 && (
@@ -284,9 +279,7 @@ export default function GoalsPage() {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>
-              {editingId ? "Edit goal" : "Add goal"}
-            </DialogTitle>
+            <DialogTitle>{editingId ? "Edit goal" : "Add goal"}</DialogTitle>
             <DialogDescription>
               Name, target amount, and optional target date.
             </DialogDescription>

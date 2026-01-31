@@ -1,7 +1,6 @@
 "use client";
 
 import { toast } from "sonner";
-import { useMonthStore } from "@/store/useMonthStore";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,11 +10,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils";
-import { useDashboardOverview } from "@/hooks/useDashboardOverview";
+import { useDashboardOverviewAllTime } from "@/hooks/useDashboardOverview";
 
 export default function DashboardPage() {
-  const { month, year } = useMonthStore();
-  const overview = useDashboardOverview(month, year);
+  const overview = useDashboardOverviewAllTime();
   const { data, isLoading, isError, isFetching, refetch } = overview;
 
   const stats = [
@@ -23,13 +21,13 @@ export default function DashboardPage() {
       id: "income",
       label: "Total income",
       value: formatCurrency(data?.totalIncome ?? 0),
-      hint: "this month",
+      hint: "all time",
     },
     {
       id: "expenses",
       label: "Total expenses",
       value: formatCurrency(data?.totalExpenses ?? 0),
-      hint: "this month",
+      hint: "all time",
     },
     {
       id: "net",
@@ -59,9 +57,6 @@ export default function DashboardPage() {
       <header className="space-y-2">
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
-              Dashboard
-            </p>
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
               Overview
             </h1>
@@ -121,9 +116,7 @@ export default function DashboardPage() {
                   <div key={goal.id} className="space-y-1">
                     <div className="flex items-center justify-between text-sm">
                       <p className="font-semibold">{goal.title}</p>
-                      <span className="text-muted-foreground">
-                        {goal.due}
-                      </span>
+                      <span className="text-muted-foreground">{goal.due}</span>
                     </div>
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span>

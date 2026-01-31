@@ -28,7 +28,6 @@ export function DashboardNav() {
           aria-label="My Personal Finance home"
         >
           <span className="hidden sm:inline">My Personal Finance</span>
-          <span className="sm:hidden">Finance</span>
         </Link>
         <nav
           className="hidden min-w-0 flex-1 gap-6 sm:flex sm:overflow-visible [-webkit-overflow-scrolling:touch]"

@@ -66,7 +66,7 @@ function PrimaryIncomeForm({
   const [other, setOther] = useState(primary?.otherDeductions ?? "0");
 
   const net = formatNum(
-    parseNum(gross) - parseNum(tax) - parseNum(nis) - parseNum(other)
+    parseNum(gross) - parseNum(tax) - parseNum(nis) - parseNum(other),
   );
 
   async function handleSubmit(ev: React.FormEvent) {
@@ -185,12 +185,10 @@ export default function IncomePage() {
   const [addLabel, setAddLabel] = useState("");
   const [addAmount, setAddAmount] = useState("");
 
-  const primaryNet = primary
-    ? parseNum(primary.netIncome)
-    : 0;
+  const primaryNet = primary ? parseNum(primary.netIncome) : 0;
   const additionalTotal = additional.reduce(
     (s, a) => s + parseNum(a.amount),
-    0
+    0,
   );
   const totalIncome = primaryNet + additionalTotal;
 
@@ -268,9 +266,6 @@ export default function IncomePage() {
   return (
     <div className="space-y-6">
       <header>
-        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-          Income
-        </p>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
           Income
         </h1>
@@ -406,9 +401,7 @@ export default function IncomePage() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {editingId
-                ? "Edit additional income"
-                : "Add additional income"}
+              {editingId ? "Edit additional income" : "Add additional income"}
             </DialogTitle>
             <DialogDescription>
               Label (e.g. Side gig) and amount.
@@ -448,11 +441,7 @@ export default function IncomePage() {
                 Cancel
               </Button>
               <Button type="submit" disabled={savingAdditional}>
-                {savingAdditional
-                  ? "Saving…"
-                  : editingId
-                    ? "Update"
-                    : "Add"}
+                {savingAdditional ? "Saving…" : editingId ? "Update" : "Add"}
               </Button>
             </DialogFooter>
           </form>

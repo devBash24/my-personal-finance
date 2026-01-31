@@ -372,6 +372,32 @@ export async function getExpensesForMonths(
     );
 }
 
+export async function getExpensesForMonthsWithCategories(
+  userId: string,
+  monthIds: string[]
+) {
+  if (monthIds.length === 0) return [];
+  return db
+    .select({
+      id: expenses.id,
+      name: expenses.name,
+      amount: expenses.amount,
+      categoryId: expenses.categoryId,
+      categoryName: expenseCategories.name,
+    })
+    .from(expenses)
+    .innerJoin(
+      expenseCategories,
+      eq(expenses.categoryId, expenseCategories.id)
+    )
+    .where(
+      and(
+        eq(expenses.userId, userId),
+        inArray(expenses.monthId, monthIds)
+      )
+    );
+}
+
 export async function getSavingsTransactionsForMonth(
   userId: string,
   monthId: string
