@@ -21,13 +21,13 @@ export default function DashboardPage() {
       id: "income",
       label: "Total income",
       value: formatCurrency(data?.totalIncome ?? 0),
-      hint: "all time",
+      hint: "up to current month",
     },
     {
       id: "expenses",
       label: "Total expenses",
       value: formatCurrency(data?.totalExpenses ?? 0),
-      hint: "all time",
+      hint: "up to current month",
     },
     {
       id: "net",

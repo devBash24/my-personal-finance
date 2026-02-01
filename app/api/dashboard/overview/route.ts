@@ -41,8 +41,14 @@ export async function GET(request: NextRequest) {
   let prevByCategory: Record<string, number> = {};
 
   if (allTime) {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
     const userMonths = await getMonthsForUser(userId, 10_000);
-    const monthIds = userMonths.map((m) => m.id);
+    const monthsUpToNow = userMonths.filter(
+      (m) => m.year < currentYear || (m.year === currentYear && m.month <= currentMonth)
+    );
+    const monthIds = monthsUpToNow.map((m) => m.id);
 
     const [incomeRows, additionalIncomeRows, expensesData, accountsData] = await Promise.all([
       getIncomeForMonths(userId, monthIds),

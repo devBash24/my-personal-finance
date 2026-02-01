@@ -29,7 +29,15 @@ export async function GET(request: NextRequest) {
   const limit = limitParam === "all" ? 120 : Math.min(12, parseInt(limitParam ?? "12", 10) || 12);
 
   const userId = session.user.id;
-  const monthsList = await getMonthsForUser(userId, limit);
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth() + 1;
+  const rawMonths = await getMonthsForUser(userId, 120);
+  const monthsList = rawMonths
+    .filter(
+      (m) => m.year < currentYear || (m.year === currentYear && m.month <= currentMonth)
+    )
+    .slice(0, limit);
   const monthIds = monthsList.map((m) => m.id);
 
   const [incomeForMonths, additionalForMonths, expensesForMonths, subscriptions] =
