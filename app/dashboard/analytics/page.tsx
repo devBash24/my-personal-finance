@@ -70,6 +70,47 @@ export default function AnalyticsPage() {
     netCashFlow: row.income - row.expenses,
   }));
 
+  const maxChartValue = Math.max(
+    0,
+    ...chartData.flatMap((row) => [
+      row.income ?? 0,
+      row.expenses ?? 0,
+      Math.abs(row.netCashFlow ?? 0),
+      row.savings ?? 0,
+    ])
+  );
+  const yAxisDomainMax =
+    maxChartValue <= 0 ? 1000 : Math.ceil((maxChartValue * 1.1) / 1000) * 1000;
+
+  const netCashFlowValues = chartData.map((row) => row.netCashFlow ?? 0);
+  const netCashFlowMin = Math.min(0, ...netCashFlowValues);
+  const netCashFlowMax = Math.max(0, ...netCashFlowValues);
+  const netCashFlowDomainMax =
+    Math.abs(netCashFlowMax) >= Math.abs(netCashFlowMin)
+      ? Math.ceil((netCashFlowMax * 1.1) / 1000) * 1000
+      : Math.ceil((Math.abs(netCashFlowMin) * 1.1) / 1000) * 1000;
+  const netCashFlowDomainMin =
+    netCashFlowMin < 0
+      ? -Math.ceil((Math.abs(netCashFlowMin) * 1.1) / 1000) * 1000
+      : 0;
+
+  const yAxisTicks = [0];
+  for (let step = 1000; step < yAxisDomainMax; step += 1000) {
+    yAxisTicks.push(step);
+  }
+  if (yAxisDomainMax > 0) yAxisTicks.push(yAxisDomainMax);
+
+  function formatYAxisTick(value: number | string): string {
+    const v = Number(value);
+    if (Number.isNaN(v)) return "";
+    if (v === 0) return "0";
+    if (Math.abs(v) >= 1000) {
+      const k = Math.round(Math.abs(v) / 1000);
+      return v < 0 ? `-${k}k` : `${k}k`;
+    }
+    return String(Math.round(v));
+  }
+
   const pieData = expenseBreakdown
     .filter((e) => (e.amount ?? 0) > 0)
     .map((e) => ({
@@ -141,7 +182,7 @@ export default function AnalyticsPage() {
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                       data={chartData}
-                      margin={{ top: 8, right: 4, left: -16, bottom: 0 }}
+                      margin={{ top: 8, right: 8, left: 8, bottom: 0 }}
                     >
                       <CartesianGrid
                         strokeDasharray="3 3"
@@ -156,12 +197,10 @@ export default function AnalyticsPage() {
                       <YAxis
                         className="text-[10px] sm:text-xs"
                         tick={{ fill: "var(--muted-foreground)" }}
-                        tickFormatter={(v) =>
-                          Math.abs(v) >= 1000
-                            ? `${v < 0 ? "-" : ""}$${Math.abs(v / 1000).toFixed(1)}k`
-                            : formatCurrency(v)
-                        }
-                        width={36}
+                        domain={[0, yAxisDomainMax]}
+                        ticks={yAxisTicks}
+                        tickFormatter={formatYAxisTick}
+                        width={44}
                       />
                       <Tooltip
                         contentStyle={{
@@ -210,7 +249,7 @@ export default function AnalyticsPage() {
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart
                       data={chartData}
-                      margin={{ top: 8, right: 4, left: -16, bottom: 0 }}
+                      margin={{ top: 8, right: 8, left: 8, bottom: 0 }}
                     >
                       <CartesianGrid
                         strokeDasharray="3 3"
@@ -225,12 +264,9 @@ export default function AnalyticsPage() {
                       <YAxis
                         className="text-[10px] sm:text-xs"
                         tick={{ fill: "var(--muted-foreground)" }}
-                        tickFormatter={(v) =>
-                          Math.abs(v) >= 1000
-                            ? `${v < 0 ? "-" : ""}$${Math.abs(v / 1000).toFixed(1)}k`
-                            : formatCurrency(v)
-                        }
-                        width={36}
+                        domain={[netCashFlowDomainMin, netCashFlowDomainMax]}
+                        tickFormatter={formatYAxisTick}
+                        width={44}
                       />
                       <Tooltip
                         contentStyle={{
@@ -273,7 +309,7 @@ export default function AnalyticsPage() {
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart
                       data={chartData}
-                      margin={{ top: 8, right: 4, left: -16, bottom: 0 }}
+                      margin={{ top: 8, right: 8, left: 8, bottom: 0 }}
                     >
                       <CartesianGrid
                         strokeDasharray="3 3"
@@ -288,12 +324,10 @@ export default function AnalyticsPage() {
                       <YAxis
                         className="text-[10px] sm:text-xs"
                         tick={{ fill: "var(--muted-foreground)" }}
-                        tickFormatter={(v) =>
-                          Math.abs(v) >= 1000
-                            ? `${v < 0 ? "-" : ""}$${Math.abs(v / 1000).toFixed(1)}k`
-                            : formatCurrency(v)
-                        }
-                        width={36}
+                        domain={[0, yAxisDomainMax]}
+                        ticks={yAxisTicks}
+                        tickFormatter={formatYAxisTick}
+                        width={44}
                       />
                       <Tooltip
                         contentStyle={{
