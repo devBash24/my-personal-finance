@@ -1,48 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Personal Finance
 
-## Getting Started
+A single place to manage your money—income, expenses, savings, goals, and debts—with a clear overview and charts so you can see where you stand.
 
-First, run the development server:
+I built this because I wanted **one platform** where I could actually manage my finance the way I want. Compared to other apps, this is the experience I was looking for.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## What you get
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Welcome & balance at a glance
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Land in one place: see your current balance and net worth, and get started or log in without clutter.
 
-## Learn More
+![Welcome and balance](images/image 1.png)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Overview
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Dashboard with your totals: **total income**, **total expenses**, **net savings**, and **active goals** in one view. Pick a month and see the numbers that matter.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Expenses
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Track spending by category (Food, Transportation, Utilities, Misc, etc.). See **monthly spending** per category with a comparison to last month, add and edit or delete individual expenses, and browse a full list of transactions for the selected month.
 
-### Fix 403 "Invalid origin" on sign-out (production)
+![Expenses by category](images/Image 2.png)
 
-If sign-out returns `403 Forbidden` with "Invalid origin" on your deployed app (e.g. Vercel), the Neon Auth service must allow your app’s origin. Add your production URL to the auth service’s **trusted origins**:
+---
 
-1. In the **Neon Console** (or wherever your Neon Auth service is configured), open the project that has Neon Auth and find the **environment variables** for the auth service (the one used by `NEON_AUTH_BASE_URL`).
-2. Set **`BETTER_AUTH_TRUSTED_ORIGINS`** to include your app’s origin, for example:
-   - Single: `https://my-personal-finance-vc.vercel.app`
-   - Multiple (local + production): `https://my-personal-finance-vc.vercel.app,http://localhost:3000`
-3. Redeploy or restart the auth service so the new env var is applied.
+### Analytics & charts
 
-After that, sign-out from `https://my-personal-finance-vc.vercel.app` should succeed.
+**Income vs expenses** as monthly bars so you can compare earnings and spending at a glance. **Net cash flow** over time (income minus expenses per month) so you see your financial trend. Choose the period (e.g. 6 months, 12 months, all time) and use the same analytics on desktop and mobile.
+
+![Analytics – Income vs expenses and net cash flow](images/Image 3.png)
+
+![Analytics on mobile](images/Image 4.jpeg)
+
+---
+
+### Income, goals, savings & debts
+
+- **Income** – Record and manage your income (primary and additional sources).
+- **Goals** – Set goals and link them to savings accounts to track progress.
+- **Savings** – Manage savings accounts and their transactions.
+- **Debts** – Track what you owe and pay it down.
+
+All of this is in the main navigation so you can move between Overview, Analytics, Income, Goals, Savings, Debts, and Expenses in one app.
+
+---
+
+### Settings & theme
+
+Customize the app to your preference: choose **Light**, **Dark**, **Ocean**, or other themes so the interface fits how you like to work.
+
+![Settings and theme](images/Image 5.jpeg)
