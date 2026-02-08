@@ -34,3 +34,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+### Fix 403 "Invalid origin" on sign-out (production)
+
+If sign-out returns `403 Forbidden` with "Invalid origin" on your deployed app (e.g. Vercel), the Neon Auth service must allow your app’s origin. Add your production URL to the auth service’s **trusted origins**:
+
+1. In the **Neon Console** (or wherever your Neon Auth service is configured), open the project that has Neon Auth and find the **environment variables** for the auth service (the one used by `NEON_AUTH_BASE_URL`).
+2. Set **`BETTER_AUTH_TRUSTED_ORIGINS`** to include your app’s origin, for example:
+   - Single: `https://my-personal-finance-vc.vercel.app`
+   - Multiple (local + production): `https://my-personal-finance-vc.vercel.app,http://localhost:3000`
+3. Redeploy or restart the auth service so the new env var is applied.
+
+After that, sign-out from `https://my-personal-finance-vc.vercel.app` should succeed.

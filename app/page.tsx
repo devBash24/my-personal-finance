@@ -302,6 +302,15 @@ export default function HomePage() {
           <p className="block text-center text-xs text-muted-foreground lg:hidden">
             My Personal Finance
           </p>
+          <p className="text-center text-sm text-muted-foreground">
+            <Link href="/terms" className="hover:underline">
+              Terms of Service
+            </Link>
+            {" · "}
+            <Link href="/privacy" className="hover:underline">
+              Privacy Policy
+            </Link>
+          </p>
         </div>
       </main>
     </div>

@@ -62,6 +62,15 @@ function ResetPasswordForm() {
           >
             Back to login
           </Link>
+          <p className="mt-6 text-center text-xs text-muted-foreground">
+            <Link href="/terms" className="hover:underline">
+              Terms
+            </Link>
+            {" · "}
+            <Link href="/privacy" className="hover:underline">
+              Privacy
+            </Link>
+          </p>
         </div>
       </div>
     );
@@ -101,6 +110,15 @@ function ResetPasswordForm() {
             className="font-medium text-primary underline-offset-4 hover:underline"
           >
             Back to login
+          </Link>
+        </p>
+        <p className="text-center text-xs text-muted-foreground">
+          <Link href="/terms" className="hover:underline">
+            Terms
+          </Link>
+          {" · "}
+          <Link href="/privacy" className="hover:underline">
+            Privacy
           </Link>
         </p>
       </form>
